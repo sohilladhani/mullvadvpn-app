@@ -306,7 +306,7 @@ class ApplicationMain {
     // Unsubscribe the event handler
     try {
       if (this.daemonEventListener) {
-        await this.daemonRpc.unsubscribeDaemonEventListener(this.daemonEventListener);
+        this.daemonRpc.unsubscribeDaemonEventListener(this.daemonEventListener);
 
         log.info('Unsubscribed from the daemon events');
       }
@@ -415,7 +415,7 @@ class ApplicationMain {
 
     // subscribe to events
     try {
-      this.daemonEventListener = await this.subscribeEvents();
+      this.daemonEventListener = this.subscribeEvents();
     } catch (error) {
       log.error(`Failed to subscribe: ${error.message}`);
 
@@ -496,6 +496,9 @@ class ApplicationMain {
   };
 
   private onDaemonDisconnected = (error?: Error) => {
+    if (this.daemonEventListener) {
+      this.daemonRpc.unsubscribeDaemonEventListener(this.daemonEventListener);
+    }
     // make sure we were connected before to distinguish between a failed attempt to reconnect and
     // connection loss.
     const wasConnected = this.connectedToDaemon;
@@ -545,12 +548,12 @@ class ApplicationMain {
   private recoverFromBootstrapError(_error?: Error) {
     // Attempt to reconnect to daemon if the program fails to fetch settings, tunnel state or
     // subscribe for RPC events.
-    this.daemonRpc.disconnect();
-
-    this.reconnectToDaemon();
+    if (this.daemonEventListener) {
+      this.daemonRpc.unsubscribeDaemonEventListener(this.daemonEventListener);
+    }
   }
 
-  private async subscribeEvents(): Promise<SubscriptionListener<DaemonEvent>> {
+  private subscribeEvents(): SubscriptionListener<DaemonEvent> {
     const daemonEventListener = new SubscriptionListener(
       (daemonEvent: DaemonEvent) => {
         if ('tunnelState' in daemonEvent) {
@@ -578,7 +581,7 @@ class ApplicationMain {
       },
     );
 
-    await this.daemonRpc.subscribeDaemonEventListener(daemonEventListener);
+    this.daemonRpc.subscribeDaemonEventListener(daemonEventListener);
 
     return daemonEventListener;
   }
