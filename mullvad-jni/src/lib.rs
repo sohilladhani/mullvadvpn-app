@@ -46,6 +46,9 @@ pub enum Error {
     #[error(display = "Failed to initialize the mullvad daemon")]
     InitializeDaemon(#[error(source)] mullvad_daemon::Error),
 
+    #[error(display = "Failed to spawn the tokio runtime")]
+    InitializeTokioRuntime(#[error(source)] io::Error),
+
     #[error(display = "Failed to spawn the JNI event listener")]
     SpawnJniEventListener(#[error(source)] jni_event_listener::Error),
 }
@@ -202,7 +205,13 @@ fn spawn_daemon(
         .map_err(Error::CreateGlobalReference)?;
     let (tx, rx) = mpsc::channel();
 
-    thread::spawn(move || {
+    let mut runtime = tokio::runtime::Builder::new()
+        .threaded_scheduler()
+        .enable_all()
+        .build()
+        .map_err(Error::InitializeTokioRuntime)?;
+
+    runtime.spawn(async move {
         let jvm = android_context.jvm.clone();
         let daemon = Daemon::start(
             Some(resource_dir.clone()),
@@ -212,12 +221,13 @@ fn spawn_daemon(
             listener,
             command_channel,
             android_context,
-        );
+        )
+        .await;
 
         match daemon {
             Ok(daemon) => {
                 let _ = tx.send(Ok(()));
-                match daemon.run() {
+                match daemon.run().await {
                     Ok(()) => log::info!("Mullvad daemon has stopped"),
                     Err(error) => log::error!("{}", error.display_chain()),
                 }
