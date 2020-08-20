@@ -1,6 +1,7 @@
 package net.mullvad.mullvadvpn.service
 
 import kotlin.math.min
+import kotlin.properties.Delegates.observable
 import kotlinx.coroutines.delay
 import net.mullvad.mullvadvpn.model.GetAccountDataResult
 import net.mullvad.mullvadvpn.util.JobTracker
@@ -23,7 +24,9 @@ class AccountCache(val daemon: MullvadDaemon, val settingsListener: SettingsList
     val onAccountNumberChange = EventNotifier<String?>(null)
     val onAccountExpiryChange = EventNotifier<DateTime?>(null)
 
-    var newlyCreatedAccount = false
+    var newlyCreatedAccount by observable(false) { _, _, _ ->
+        createdAccountExpiry = null
+    }
         private set
 
     private val jobTracker = JobTracker()
@@ -31,6 +34,7 @@ class AccountCache(val daemon: MullvadDaemon, val settingsListener: SettingsList
     private var accountNumber by onAccountNumberChange.notifiable()
     private var accountExpiry by onAccountExpiryChange.notifiable()
 
+    private var createdAccountExpiry: DateTime? = null
     private var oldAccountExpiry: DateTime? = null
 
     init {
@@ -116,8 +120,12 @@ class AccountCache(val daemon: MullvadDaemon, val settingsListener: SettingsList
                 accountExpiry = newAccountExpiry
                 oldAccountExpiry = null
 
-                if (accountExpiry != null) {
-                    newlyCreatedAccount = false
+                if (accountExpiry != null && newlyCreatedAccount) {
+                    if (createdAccountExpiry == null) {
+                        createdAccountExpiry = accountExpiry
+                    } else if (accountExpiry != createdAccountExpiry) {
+                        newlyCreatedAccount = false
+                    }
                 }
 
                 return true
