@@ -112,6 +112,8 @@
 		587AD7C723421D8600E93A53 /* TunnelSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587AD7C523421D7000E93A53 /* TunnelSettings.swift */; };
 		587AD7CA2342283900E93A53 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587AD7C92342283900E93A53 /* Account.swift */; };
 		587CBFE322807F530028DED3 /* UIColor+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587CBFE222807F530028DED3 /* UIColor+Helpers.swift */; };
+		5880B9CA24EE733A00173CE4 /* GroupOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5880B9C924EE733A00173CE4 /* GroupOperation.swift */; };
+		5880B9CB24EE733A00173CE4 /* GroupOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5880B9C924EE733A00173CE4 /* GroupOperation.swift */; };
 		588534BF246193D90018B744 /* AutomaticKeyRotationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588534BD246193C00018B744 /* AutomaticKeyRotationManager.swift */; };
 		5888AD7F2279B6BF0051EB06 /* RelayStatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888AD7E2279B6BF0051EB06 /* RelayStatusIndicatorView.swift */; };
 		5888AD83227B11080051EB06 /* SelectLocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888AD82227B11080051EB06 /* SelectLocationCell.swift */; };
@@ -314,6 +316,7 @@
 		587AD7C523421D7000E93A53 /* TunnelSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TunnelSettings.swift; sourceTree = "<group>"; };
 		587AD7C92342283900E93A53 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		587CBFE222807F530028DED3 /* UIColor+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Helpers.swift"; sourceTree = "<group>"; };
+		5880B9C924EE733A00173CE4 /* GroupOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupOperation.swift; sourceTree = "<group>"; };
 		588534BD246193C00018B744 /* AutomaticKeyRotationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticKeyRotationManager.swift; sourceTree = "<group>"; };
 		5888AD7E2279B6BF0051EB06 /* RelayStatusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayStatusIndicatorView.swift; sourceTree = "<group>"; };
 		5888AD82227B11080051EB06 /* SelectLocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLocationCell.swift; sourceTree = "<group>"; };
@@ -452,6 +455,7 @@
 				58E973DD24850EB600096F90 /* AsyncOperation.swift */,
 				580EE20B24B3225F00F9D8A1 /* DelayOperation.swift */,
 				580EE20524B3222200F9D8A1 /* ExclusivityController.swift */,
+				5880B9C924EE733A00173CE4 /* GroupOperation.swift */,
 				580EE21A24B3236900F9D8A1 /* InputOperation.swift */,
 				580EE21424B3231200F9D8A1 /* OperationBlockObserver.swift */,
 				580EE20324B321EC00F9D8A1 /* OperationObserver.swift */,
@@ -980,6 +984,7 @@
 				58F19E35228C15BA00C7710B /* SpinnerActivityIndicatorView.swift in Sources */,
 				58A99ED3240014A0006599E9 /* ConsentViewController.swift in Sources */,
 				58FAEE0124533A9C00CB0F5B /* KeychainClass.swift in Sources */,
+				5880B9CA24EE733A00173CE4 /* GroupOperation.swift in Sources */,
 				58CCA0162242560B004F3011 /* UIColor+Palette.swift in Sources */,
 				58AEEF6B2344A46200C9BBD5 /* TunnelSettingsManager.swift in Sources */,
 				587CBFE322807F530028DED3 /* UIColor+Helpers.swift in Sources */,
@@ -1074,6 +1079,7 @@
 				58F3C0962492617E003E76BE /* AsyncOperation.swift in Sources */,
 				580EE22924B3289300F9D8A1 /* AssociatedValue.swift in Sources */,
 				58AEEF662344A37400C9BBD5 /* KeychainError.swift in Sources */,
+				5880B9CB24EE733A00173CE4 /* GroupOperation.swift in Sources */,
 				5840250222B1124600E4CFEC /* IpAddress+Codable.swift in Sources */,
 				58BA693223EAE1AE009DC256 /* SimulatorTunnelProvider.swift in Sources */,
 				580EE21924B3235100F9D8A1 /* AnyOperationObserver.swift in Sources */,
