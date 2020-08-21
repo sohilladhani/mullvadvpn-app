@@ -35,6 +35,7 @@ const Button = styled(Cell.CellButton)({
   paddingRight: '16px',
   // The actual padding is 22px except for the tick icon which has 18.
   paddingLeft: '18px',
+  opacity: 1,
 });
 
 const StyledChevronButton = styled(ChevronButton)({

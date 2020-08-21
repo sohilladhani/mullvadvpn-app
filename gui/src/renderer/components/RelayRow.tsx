@@ -18,6 +18,7 @@ const Button = styled(Cell.CellButton)((props: { selected: boolean }) => ({
   paddingRight: 0,
   paddingLeft: '50px',
   backgroundColor: !props.selected ? colors.blue20 : undefined,
+  opacity: 1,
 }));
 
 const Label = styled(Cell.Label)({

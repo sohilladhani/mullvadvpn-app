@@ -5,7 +5,6 @@ import {
   StyledAutoSizingTextInputFiller,
   StyledCellButton,
   StyledContainer,
-  StyledLabel,
   StyledInput,
   StyledSection,
 } from './CellStyles';
@@ -16,6 +15,7 @@ export {
   StyledFooterBoldText as FooterBoldText,
   StyledFooterText as FooterText,
   StyledInputFrame as InputFrame,
+  StyledLabel as Label,
   StyledSectionTitle as SectionTitle,
   StyledSubText as SubText,
   StyledTintedIcon as Icon,
@@ -29,10 +29,10 @@ interface IContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-export function Container({ disabled, ...otherProps }: IContainerProps) {
+export function Container(props: IContainerProps) {
   return (
-    <CellDisabledContext.Provider value={disabled ?? false}>
-      <StyledContainer {...otherProps} />
+    <CellDisabledContext.Provider value={props.disabled ?? false}>
+      <StyledContainer {...props} />
     </CellDisabledContext.Provider>
   );
 }
@@ -60,11 +60,6 @@ export function Section(props: ISectionProps) {
       <CellSectionContext.Provider value={true}>{props.children}</CellSectionContext.Provider>
     </StyledSection>
   );
-}
-
-export function Label(props: React.HTMLAttributes<HTMLDivElement>) {
-  const disabled = useContext(CellDisabledContext);
-  return <StyledLabel disabled={disabled} {...props} />;
 }
 
 export function Switch(props: StandaloneSwitch['props']) {

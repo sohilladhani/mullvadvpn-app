@@ -4,13 +4,14 @@ import { colors } from '../../config.json';
 import { buttonText, mediumText, smallText } from './common-styles';
 import ImageView, { IImageViewProps } from './ImageView';
 
-export const StyledContainer = styled.div({
+export const StyledContainer = styled.div((props: { disabled?: boolean }) => ({
   display: 'flex',
   backgroundColor: colors.blue,
   alignItems: 'center',
   paddingLeft: '22px',
   paddingRight: '16px',
-});
+  opacity: props.disabled ? 0.5 : undefined,
+}));
 
 export const StyledSection = styled.div({
   display: 'flex',
@@ -24,6 +25,7 @@ export const StyledSectionTitle = styled.span(buttonText, {
 });
 
 interface IStyledCellButtonProps {
+  disabled?: boolean;
   selected?: boolean;
   containedInSection: boolean;
 }
@@ -45,14 +47,15 @@ export const StyledCellButton = styled.button({}, (props: IStyledCellButtonProps
   ':not(:disabled):hover': {
     backgroundColor: props.selected ? colors.green : colors.blue80,
   },
+  opacity: props.disabled ? 0.5 : undefined,
 }));
 
-export const StyledLabel = styled.div(buttonText, (props: { disabled: boolean }) => ({
+export const StyledLabel = styled.div(buttonText, {
   margin: '14px 0',
   flex: 1,
-  color: props.disabled ? colors.white40 : colors.white,
+  color: colors.white,
   textAlign: 'left',
-}));
+});
 
 export const StyledSubText = styled.span(smallText, {
   color: colors.white60,

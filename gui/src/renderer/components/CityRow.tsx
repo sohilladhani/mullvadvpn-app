@@ -28,6 +28,7 @@ const Button = styled(Cell.CellButton)((props: { selected: boolean }) => ({
   paddingRight: '16px',
   paddingLeft: '34px',
   backgroundColor: !props.selected ? colors.blue40 : undefined,
+  opacity: 1,
 }));
 
 const StyledChevronButton = styled(ChevronButton)({

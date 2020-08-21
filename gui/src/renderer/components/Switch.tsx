@@ -16,36 +16,29 @@ interface IState {
 
 const PAN_DISTANCE = 10;
 
-const SwitchContainer = styled.div({}, (props: { disabled: boolean }) => ({
+const SwitchContainer = styled.div({
   position: 'relative',
   width: '48px',
   height: '30px',
-  borderColor: props.disabled ? colors.white20 : colors.white80,
+  borderColor: colors.white80,
   borderWidth: '2px',
   borderStyle: 'solid',
   borderRadius: '16px',
   padding: '2px',
-}));
-
-const Knob = styled.div({}, (props: { isOn: boolean; isPressed: boolean; disabled: boolean }) => {
-  let backgroundColor = props.isOn ? colors.green : colors.red;
-  if (props.disabled) {
-    backgroundColor = props.isOn ? colors.green40 : colors.red40;
-  }
-
-  return {
-    position: 'absolute',
-    height: '22px',
-    borderRadius: '11px',
-    transition: 'all 200ms linear',
-    width: props.isPressed ? '26px' : '22px',
-    backgroundColor,
-    // When enabled the button should be placed all the way to the right (100%) minus padding (2px).
-    left: props.isOn ? 'calc(100% - 2px)' : '2px',
-    // This moves the knob to the left making the right side aligned with the parent's right side.
-    transform: `translateX(${props.isOn ? '-100%' : '0'})`,
-  };
 });
+
+const Knob = styled.div({}, (props: { isOn: boolean; isPressed: boolean }) => ({
+  position: 'absolute',
+  height: '22px',
+  borderRadius: '11px',
+  transition: 'all 200ms linear',
+  width: props.isPressed ? '26px' : '22px',
+  backgroundColor: props.isOn ? colors.green : colors.red,
+  // When enabled the button should be placed all the way to the right (100%) minus padding (2px).
+  left: props.isOn ? 'calc(100% - 2px)' : '2px',
+  // This moves the knob to the left making the right side aligned with the parent's right side.
+  transform: `translateX(${props.isOn ? '-100%' : '0'})`,
+}));
 
 export default class Switch extends React.Component<IProps, IState> {
   public state: IState = {
@@ -82,10 +75,8 @@ export default class Switch extends React.Component<IProps, IState> {
       <SwitchContainer
         ref={this.containerRef}
         onClick={this.handleClick}
-        disabled={this.props.disabled ?? false}
         className={this.props.className}>
         <Knob
-          disabled={this.props.disabled ?? false}
           isOn={this.state.isOn}
           isPressed={this.state.isPressed}
           onMouseDown={this.handleMouseDown}
