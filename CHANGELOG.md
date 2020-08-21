@@ -26,6 +26,11 @@ Line wrap the file at 100 chars.                                              Th
 ### Changed
 - Use gRPC for communication between frontends and the backend instead of JSON-RPC.
 
+### Fixed
+#### Android
+- Fix crash when selecting the whole text entered for the voucher code and then deleting it in the
+  Redeem Voucher dialog.
+
 
 ## [2020.6-beta1] - 2020-08-20
 ### Added
